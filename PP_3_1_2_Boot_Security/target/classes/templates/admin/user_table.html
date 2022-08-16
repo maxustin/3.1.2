@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Table of users</title>
+</head>
+<body>
+<div>
+    <table th:border="1">
+        <thread>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Username</th>
+                <th scope="col">Edit</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thread>
+        <tbody>
+        <tr th:each="user: ${usertable}">
+            <td style="padding: 0px 5px" th:text="${user.id}"/>
+            <td style="padding: 0px 5px" th:text="${user.firstName}"/>
+            <td style="padding: 0px 5px" th:text="${user.lastName}"/>
+            <td style="padding: 0px 5px" th:text="${user.email}"/>
+            <td style="padding: 0px 5px"><a th:href="@{/admin/{id}/edit(id=${user.getId()})}">
+                <input type="button" value="Edit">
+            </a></td>
+            <td style="padding: 0px 5px">
+                <form th:method="DELETE" th:action="@{/admin/{id}/delete/user(id=${user.getId()})}">
+                <input type="submit" value="Delete"/>
+            </form></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div>
+    <p>
+        <a th:href="@{/user}">Show user page</a>
+    </p>
+    <p>
+        <a th:href="@{/admin/new}">Create new user</a>
+    </p>
+    <p>
+        <a th:href="@{/logout}">Log out</a>
+    </p>
+</div>
+</body>
+</html>
